@@ -100,7 +100,7 @@ def get_login():
           <input type="submit" value="enter">
         </form>"""
 
-@app.route('/users', methods=['GET'])
+@app.route('/user', methods=['GET'])
 def get_users():
     with SQLiteDatabase('DB.db') as db:
         res = db.fetch_all('SELECT * FROM user')
