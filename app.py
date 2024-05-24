@@ -49,13 +49,6 @@ class SQLiteDatabase:
         self.connection.commit()
 
 
-def dict_factory(cursor, row):
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0]] = row[idx]
-    return d
-
-
 @app.route('/', methods=['GET'])
 def index():
     return 'Welcome to the homepage!'
@@ -109,26 +102,26 @@ def get_login():
           <input type="password" id="password" name="password">
           <input type="submit" value="enter">
         </form>"""
-@app.route('/user', methods=['GET', 'POST', 'PUT'])
-def get_user():
+@app.route('/user/<user_id>', methods=['GET', 'POST', 'PUT'])
+def get_user(user_id):
     if request.method == 'POST':
         return 'user data modified'
     elif request.method == 'PUT':
         return 'user info successfully updated'
     else:
         with SQLiteDatabase('DB.db') as db:
-            res = db.fetch_one('SELECT login, phone, birth_date FROM user WHERE id=?', (1,))
-        return str(res)
+            res = db.fetch_one('SELECT login, phone, birth_date FROM user WHERE id=?', user_id)
+        return res
 
 
 
-@app.route('/funds', methods=['GET', 'POST'])
-def get_funds():
+@app.route('/funds/<user_id>', methods=['GET', 'POST'])
+def get_funds(user_id):
     if request.method == 'POST':
         return 'user account was successfully funded'
     else:
         with SQLiteDatabase('DB.db') as db:
-            res = db.fetch_one('SELECT funds FROM user WHERE id=?', (1,))
+            res = db.fetch_one('SELECT funds FROM user WHERE id=?', user_id)
         return res
 
 @app.route('/fitness_center/<int:gym_id>/services', methods=['GET'])
