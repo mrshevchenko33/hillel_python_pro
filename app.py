@@ -76,11 +76,8 @@ def get_register():
 </form>"""
 
 def check_credentials(username, password):
-    conn = sqlite3.connect('DB.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM user WHERE login = ? AND password = ?', (username, password))
-    user = cursor.fetchone()
-    conn.close()
+    with SQLiteDatabase('DB.db') as db:
+        user = db.fetch_one('SELECT * FROM user WHERE login = ? AND password = ?', (username, password))
     return user is not None
 
 
@@ -102,6 +99,12 @@ def get_login():
           <input type="password" id="password" name="password">
           <input type="submit" value="enter">
         </form>"""
+
+@app.route('/users', methods=['GET'])
+def get_users():
+    with SQLiteDatabase('DB.db') as db:
+        res = db.fetch_all('SELECT * FROM user')
+    return res
 @app.route('/user/<user_id>', methods=['GET', 'POST', 'PUT'])
 def get_user(user_id):
     if request.method == 'POST':
