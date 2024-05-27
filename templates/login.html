@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Вхід</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    .form-signin {
+      width: 100%;
+      max-width: 400px;
+      padding: 15px;
+      margin: auto;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+
+    .form-signin-heading {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-control {
+      height: 50px;
+      border-radius: 25px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      border-radius: 25px;
+      height: 50px;
+      padding: 0 30px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body class="text-center">
+
+<main class="form-signin">
+  <form method="post">
+    <h1 class="h3 mb-3 fw-normal form-signin-heading">Вхід</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="login" name="login" placeholder="Логін" required>
+      <label for="login">Логін</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password" name="password" placeholder="Пароль" required>
+      <label for="password">Пароль</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Ввійти</button>
+  </form>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

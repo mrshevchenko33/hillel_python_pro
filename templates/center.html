@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі фітнес-центру</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">Деталі фітнес-центру</h2>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">{{ center.name }}</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>ID:</strong> {{ center.id }}</p>
+            <p><strong>Адреса:</strong> {{ center.adress }}</p>
+            <p><strong>Контакти:</strong> {{ center.contacts }}</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

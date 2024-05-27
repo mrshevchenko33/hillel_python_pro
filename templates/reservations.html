@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резервация користувача</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .btn-group {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            margin-bottom: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    {% if reservations %}
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title mb-0">Резервации користувача</h2>
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ідентифікатор резерву</th>
+                            <th>Дата</th>
+                            <th>Час</th>
+                            <th>Ім'я користувача</th>
+                            <th>Назва послуги</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                            <tr>
+                                <td>{{ reservation.reservation_id }}</td>
+                                <td>{{ reservation.date }}</td>
+                                <td>{{ reservation.time }}</td>
+                                <td>{{ reservation.user_name }}</td>
+                                <td>{{ reservation.service_name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title mb-0">Деталі резерву</h2>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">Ідентифікатор резерву:</dt>
+                    <dd class="col-sm-8">{{ reservation.reservation_id }}</dd>
+
+                    <dt class="col-sm-4">Дата:</dt>
+                    <dd class="col-sm-8">{{ reservation.date }}</dd>
+
+                    <dt class="col-sm-4">Час:</dt>
+                    <dd class="col-sm-8">{{ reservation.time }}</dd>
+
+                    <dt class="col-sm-4">Ім'я користувача:</dt>
+                    <dd class="col-sm-8">{{ reservation.user_name }}</dd>
+
+                    <dt class="col-sm-4">Назва послуги:</dt>
+                    <dd class="col-sm-8">{{ reservation.service_name }}</dd>
+                </dl>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

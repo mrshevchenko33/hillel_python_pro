@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інформація про послугу</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .btn-group {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="/" class="btn btn-primary">Головна</a>
+        <a href="/login" class="btn btn-primary">Увійти</a>
+        <a href="/register" class="btn btn-primary">Реєстрація</a>
+        <a href="/fitness_center" class="btn btn-primary">Фітнес-центри</a>
+        <a href="/" class="btn btn-primary">Програма лояльносты</a>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Інформація про послугу</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">ID:</dt>
+                <dd class="col-sm-8">{{ service.service_id }}</dd>
+
+                <dt class="col-sm-4">Назва:</dt>
+                <dd class="col-sm-8">{{ service.name }}</dd>
+
+                <dt class="col-sm-4">Тривалість:</dt>
+                <dd class="col-sm-8">{{ service.duration }}</dd>
+
+                <dt class="col-sm-4">Ціна:</dt>
+                <dd class="col-sm-8">{{ service.price }}</dd>
+
+                <dt class="col-sm-4">Опис:</dt>
+                <dd class="col-sm-8">{{ service.description }}</dd>
+
+                <dt class="col-sm-4">Макс. учасники:</dt>
+                <dd class="col-sm-8">{{ service.max_attendees }}</dd>
+
+                <dt class="col-sm-4">Фітнес-центр:</dt>
+                <dd class="col-sm-8">{{ service.gym_name }}</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

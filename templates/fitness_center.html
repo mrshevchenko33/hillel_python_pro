@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відомості про фітнес-центри</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .btn-group {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .dropdown-menu {
+            min-width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="/" class="btn btn-primary">Головна</a>
+        <a href="/login" class="btn btn-primary">Увійти</a>
+        <a href="/register" class="btn btn-primary">Реєстрація</a>
+        <a href="/fitness_center" class="btn btn-primary">Фітнес-центри</a>
+        <a href="/" class="btn btn-primary">Програма лояльносты</a>
+    </div>
+    <h2 class="text-center mb-4">Відомості про фітнес-центри</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Адреса</th>
+            <th>Контакти</th>
+            <th>Назва</th>
+            <th>Меню</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for center in centers %}
+        <tr>
+            <td>{{ center.id }}</td>
+            <td>{{ center.adress }}</td>
+            <td>{{ center.contacts }}</td>
+            <td>{{ center.name }}</td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ center.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Меню
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ center.id }}">
+                        <a class="dropdown-item" href="/fitness_center/{{ center.id }}/services">Сервіси</a>
+                        <a class="dropdown-item" href="/fitness_center/{{ center.id }}/trainer">Тренери</a>
+                        <a class="dropdown-item" href="/fitness_center/{{ center.id }}">Деталі</a>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
