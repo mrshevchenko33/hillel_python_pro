@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Рейтинг тренера</title>
+    <title>Відгуки тренера {{ trainer.name }}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -17,6 +17,7 @@
 
         .btn-group {
             margin-bottom: 20px;
+            text-align: right; /* Поместить кнопку "Вийти" вправо */
         }
 
         .card {
@@ -29,48 +30,95 @@
         .card-header {
             background-color: #007bff;
             color: #fff;
-        }
-
-        .card-body {
-            padding: 20px;
+            text-align: center;
+            border-top-left-radius: 10px; /* Скругление верхнего левого угла */
+            border-top-right-radius: 10px; /* Скругление верхнего правого угла */
         }
 
         .card-title {
             margin-bottom: 0;
         }
+
+        .review-title {
+            text-align: center;
+        }
+
+        .review-form {
+            margin-top: 20px;
+        }
+
+        /* Стили для выделения */
+        .highlight {
+            color: #dc3545; /* Цвет текста "рейтинга" */
+            font-weight: bold; /* Жирный шрифт */
+        }
+
+        /* Стили для кнопки "Вийти" */
+        .btn-logout {
+            margin-left: 10px; /* Отступ слева */
+        }
+
+        /* Стили для кнопки "Редактировать" */
+        .btn-edit {
+            float: right; /* Выравнивание кнопки вправо */
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="/" class="btn btn-primary">Головна</a>
-        <a href="/login" class="btn btn-primary">Увійти</a>
-        <a href="/register" class="btn btn-primary">Реєстрація</a>
-        <a href="/fitness_center" class="btn btn-primary">Фітнес-центри</a>
-        <a href="/" class="btn btn-primary">Програма лояльносты</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">My Fitness Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Головна</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/reservations">Мої резервації</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Особистий кабінет</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fitness_center">Фітнес-центри</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Програма лояльності</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+
+<div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title mb-0">Існуючі рейтинги і відгуки</h2>
+                    <h2 class="card-title mb-0">Відгуки тренера {{ trainer.name }}</h2>
                 </div>
                 <div class="card-body">
                     {% if reviews %}
                         <ul class="list-group">
                             {% for review in reviews %}
                                 <li class="list-group-item">
-                                    <h5 class="card-title">Рейтинг: {{ review.points }}</h5>
+                                    <h5 class="card-title highlight">Рейтинг: {{ review.points }}</h5>
                                     <p class="card-text">Відгук: {{ review.text }}</p>
                                     <p class="card-text">Користувач: {{ review.login }}</p>
                                     <p class="card-text">Фітнес-центр: {{ review.gym_name }}</p>
-                                    <p class="card-text">Тренер: {{ review.trainer_name }}</p>
+                                    <a href="/edit_review/{{ review.id }}" class="btn btn-primary">Редагувати</a>
                                 </li>
                             {% endfor %}
                         </ul>
                     {% else %}
-                        <p class="card-text">Рейтинги відсутні</p>
+                        <p class="card-text">Відгуки відсутні</p>
                     {% endif %}
                 </div>
             </div>
@@ -78,29 +126,21 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title mb-0">Залишити відгук</h2>
+                    <h2 class="card-title mb-0 review-title">Залишити відгук</h2>
                 </div>
-                <div class="card-body">
+                <div class="card-body review-form">
                     <form method="post">
                         <div class="form-group">
-                            <label for="user">Користувач:</label>
-                            <select class="form-control" id="user" name="user" required>
-                                {% for user in users %}
-                                    <option value="{{ user.id }}">{{ user.login }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="rating">Рейтинг:</label>
+                            <label for="rating">Оцінка:</label>
                             <select class="form-control" id="rating" name="rating" required>
-                                {% for i in range(1, 101) %}
+                                {% for i in range(1, 11) %}
                                     <option value="{{ i }}">{{ i }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="review">Відгук:</label>
-                            <textarea class="form-control" id="review" name="review" rows="3" required></textarea>
+                            <textarea class="form-control" id="review" name="review" rows="3" required>{{ user_reviw.text }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Відправити</button>
                     </form>

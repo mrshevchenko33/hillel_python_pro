@@ -3,122 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Резервация користувача</title>
+    <title>Мої резервації</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Общие стили */
         body {
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Цвет фона страницы */
+            font-family: Arial, sans-serif; /* Шрифт */
+            padding-top: 20px; /* Отступ сверху */
         }
 
         .container {
-            margin-top: 20px;
-        }
-
-        .btn-group {
-            margin-bottom: 20px;
+            max-width: 960px; /* Максимальная ширина контейнера */
         }
 
         .card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-            margin-top: 20px;
+            margin-bottom: 20px; /* Отступ снизу карточки */
         }
 
+        /* Стили для заголовка карточки */
         .card-header {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #007bff; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            text-align: center; /* Выравнивание текста по центру */
+            border-radius: 10px 10px 0 0; /* Закругление верхних углов */
+            padding: 20px 0; /* Внутренний отступ */
+            font-size: 24px; /* Размер текста */
         }
 
+        /* Стили для основного содержимого карточки */
         .card-body {
-            padding: 20px;
+            padding: 20px; /* Внутренний отступ */
         }
 
-        .card-title {
-            margin-bottom: 0;
+        /* Стили для текста в карточке */
+        .card-text {
+            font-size: 18px; /* Размер текста */
+            margin-bottom: 10px; /* Отступ снизу */
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        /* Стили для кнопок */
+        .btn-primary {
+            background-color: #007bff; /* Цвет фона */
+            border-color: #007bff; /* Цвет рамки */
+            border-radius: 5px; /* Закругление углов */
+            padding: 8px 20px; /* Внутренний отступ */
+            font-size: 18px; /* Размер текста */
+            margin-right: 10px; /* Отступ справа */
         }
 
-        th, td {
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
+        .btn-primary:hover {
+            background-color: #0056b3; /* Цвет фона при наведении */
+            border-color: #0056b3; /* Цвет рамки при наведении */
         }
 
-        th {
-            background-color: #f2f2f2;
+        /* Стили для кнопок "Вийти" */
+        .btn-logout {
+            background-color: #dc3545; /* Цвет фона */
+            border-color: #dc3545; /* Цвет рамки */
         }
 
-        tr:hover {
-            background-color: #f5f5f5;
+        /* Стили для кнопки "Вийти" при наведении */
+        .btn-logout:hover {
+            background-color: #c82333; /* Цвет фона при наведении */
+            border-color: #bd2130; /* Цвет рамки при наведении */
+        }
+
+        /* Стили для кнопок "Видалити" и "Редагувати" */
+        .btn-delete, .btn-edit {
+            padding: 5px 15px; /* Внутренний отступ */
+            font-size: 16px; /* Размер текста */
+            margin-right: 5px; /* Отступ справа */
+        }
+
+        /* Стили для кнопки "Видалити" */
+        .btn-delete {
+            background-color: #dc3545; /* Цвет фона */
+            border-color: #dc3545; /* Цвет рамки */
+        }
+
+        /* Стили для кнопки "Видалити" при наведении */
+        .btn-delete:hover {
+            background-color: #c82333; /* Цвет фона при наведении */
+            border-color: #bd2130; /* Цвет рамки при наведении */
+        }
+
+        /* Стили для кнопки "Редагувати" */
+        .btn-edit {
+            background-color: #ffc107; /* Цвет фона */
+            border-color: #ffc107; /* Цвет рамки */
+        }
+
+        /* Стили для кнопки "Редагувати" при наведении */
+        .btn-edit:hover {
+            background-color: #e0a800; /* Цвет фона при наведении */
+            border-color: #d39e00; /* Цвет рамки при наведении */
         }
     </style>
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">My Fitness Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Головна</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/reservations">Мої резервації</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Особистий кабінет</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fitness_center">Фітнес-центри</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Програма лояльності</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="container">
-    {% if reservations %}
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title mb-0">Резервации користувача</h2>
-            </div>
-            <div class="card-body">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Ідентифікатор резерву</th>
-                            <th>Дата</th>
-                            <th>Час</th>
-                            <th>Ім'я користувача</th>
-                            <th>Назва послуги</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for reservation in reservations %}
-                            <tr>
-                                <td>{{ reservation.reservation_id }}</td>
-                                <td>{{ reservation.date }}</td>
-                                <td>{{ reservation.time }}</td>
-                                <td>{{ reservation.user_name }}</td>
-                                <td>{{ reservation.service_name }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    {% else %}
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title mb-0">Деталі резерву</h2>
-            </div>
-            <div class="card-body">
-                <dl class="row">
-                    <dt class="col-sm-4">Ідентифікатор резерву:</dt>
-                    <dd class="col-sm-8">{{ reservation.reservation_id }}</dd>
-
-                    <dt class="col-sm-4">Дата:</dt>
-                    <dd class="col-sm-8">{{ reservation.date }}</dd>
-
-                    <dt class="col-sm-4">Час:</dt>
-                    <dd class="col-sm-8">{{ reservation.time }}</dd>
-
-                    <dt class="col-sm-4">Ім'я користувача:</dt>
-                    <dd class="col-sm-8">{{ reservation.user_name }}</dd>
-
-                    <dt class="col-sm-4">Назва послуги:</dt>
-                    <dd class="col-sm-8">{{ reservation.service_name }}</dd>
-                </dl>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <!-- Посилання на інші сторінки -->
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title mb-0">Мої резервації</h2>
+                </div>
+                <div class="card-body">
+                    {% if reservations %}
+                        <ul class="list-group">
+                            {% for reservation in reservations %}
+                                <li class="list-group-item">
+                                    <h5 class="card-title highlight">Резервація №{{ reservation.reservation_id }}</h5>
+                                    <p class="card-text">Дата: {{ reservation.date }}</p>
+                                    <p class="card-text">Час: {{ reservation.time }}</p>
+                                    <p class="card-text">Користувач: {{ reservation.user_name }}</p>
+                                    <p class="card-text">Послуга: {{ reservation.service_name }}</p>
+                                    <p class="card-text">Фітнес-центр: {{ reservation.gym_name }}</p>
+                                    <!-- Посилання на резервацію з використанням її ідентифікатора -->
+                                    <a href="/user/reservations/{{ reservation.reservation_id }}" class="btn btn-primary btn-sm">Перейти</a>
+                                    <a href="#" class="btn btn-delete btn-sm">Видалити</a>
+                                    <a href="#" class="btn btn-edit btn-sm">Редагувати</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="card-text">Ви ще не здійснили жодної резервації</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    {% endif %}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title mb-0 review-title">Забронювати послугу</h2>
+                </div>
+                <div class="card-body review-form">
+                    <form method="post" action="/user/reservations">
+                        <div class="form-group">
+                            <label for="service_id">Послуга:</label>
+                            <select class="form-control" id="service_id" name="service_id" required>
+                                {% for service in services %}
+                                    <option value="{{ service.id }}">{{ service.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Дата:</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Час:</label>
+                            <input type="time" class="form-control" id="time" name="time" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Забронювати</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

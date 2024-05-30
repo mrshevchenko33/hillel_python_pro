@@ -7,54 +7,91 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Цвет фона страницы */
+            font-family: Arial, sans-serif; /* Шрифт */
+            margin-top: 20px; /* Отступ сверху */
         }
 
         .container {
-            margin-top: 20px;
-        }
-
-        .btn-group {
-            margin-bottom: 20px;
+            max-width: 960px; /* Максимальная ширина контейнера */
         }
 
         .table {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            background-color: #fff; /* Цвет фона */
+            border-radius: 10px; /* Закругление углов */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Тень */
         }
 
         .table th,
         .table td {
-            vertical-align: middle;
-            text-align: center;
+            vertical-align: middle; /* Выравнивание по вертикали */
+            text-align: center; /* Выравнивание по горизонтали */
         }
 
         .table th {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #007bff; /* Цвет фона заголовка */
+            color: #fff; /* Цвет текста заголовка */
         }
 
         .table-striped tbody tr:nth-of-type(odd) {
-            background-color: #f2f2f2;
+            background-color: #f2f2f2; /* Цвет фона чередующихся строк */
         }
 
         .dropdown-menu {
-            min-width: 150px;
+            min-width: 150px; /* Минимальная ширина меню */
+        }
+
+        .navbar {
+            background-color: #343a40; /* Цвет фона навигационной панели */
+        }
+
+        .navbar-brand {
+            color: #fff; /* Цвет текста логотипа */
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #fff; /* Цвет текста ссылок */
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #f8f9fa; /* Цвет текста ссылок при наведении */
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="/" class="btn btn-primary">Головна</a>
-        <a href="/login" class="btn btn-primary">Увійти</a>
-        <a href="/register" class="btn btn-primary">Реєстрація</a>
-        <a href="/fitness_center" class="btn btn-primary">Фітнес-центри</a>
-        <a href="/" class="btn btn-primary">Програма лояльносты</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">My Fitness Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Головна</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/reservations">Мої резервації</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Особистий кабінет</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fitness_center">Фітнес-центри</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Програма лояльності</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+
+<div class="container">
     <h2 class="text-center mb-4">Відомості про фітнес-центри</h2>
     <table class="table table-striped">
         <thead>
@@ -82,7 +119,6 @@
                         <a class="dropdown-item" href="/fitness_center/{{ center.id }}/services">Сервіси</a>
                         <a class="dropdown-item" href="/fitness_center/{{ center.id }}/trainer">Тренери</a>
                         <a class="dropdown-item" href="/fitness_center/{{ center.id }}">Деталі</a>
-
                     </div>
                 </div>
             </td>

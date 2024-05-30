@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інформація про бронювання</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Общие стили */
+        body {
+            background-color: #f8f9fa; /* Цвет фона страницы */
+            font-family: Arial, sans-serif; /* Шрифт */
+            padding-top: 20px; /* Отступ сверху */
+        }
+
+        .container {
+            max-width: 960px; /* Максимальная ширина контейнера */
+        }
+
+        /* Стили для таблицы */
+        table {
+            width: 100%; /* Ширина таблицы */
+            border-collapse: collapse; /* Схлопывание границ ячеек */
+            margin-bottom: 20px; /* Отступ снизу таблицы */
+        }
+
+        th, td {
+            border: 1px solid #dee2e6; /* Границы ячеек */
+            padding: 10px; /* Внутренний отступ ячеек */
+            text-align: center; /* Выравнивание текста по центру */
+        }
+
+        th {
+            background-color: #007bff; /* Цвет фона заголовка таблицы */
+            color: #fff; /* Цвет текста заголовка таблицы */
+        }
+
+        /* Стили для кнопок */
+        .btn-primary {
+            background-color: #007bff; /* Цвет фона */
+            border-color: #007bff; /* Цвет рамки */
+            border-radius: 5px; /* Закругление углов */
+            padding: 8px 20px; /* Внутренний отступ */
+            font-size: 18px; /* Размер текста */
+            margin-right: 10px; /* Отступ справа */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Цвет фона при наведении */
+            border-color: #0056b3; /* Цвет рамки при наведении */
+        }
+
+        .btn-delete, .btn-edit {
+            padding: 5px 15px; /* Внутренний отступ */
+            font-size: 14px; /* Размер текста */
+            margin-right: 5px; /* Отступ справа */
+        }
+
+        .btn-delete {
+            background-color: #dc3545; /* Цвет фона */
+            border-color: #dc3545; /* Цвет рамки */
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333; /* Цвет фона при наведении */
+            border-color: #bd2130; /* Цвет рамки при наведении */
+        }
+
+        .btn-edit {
+            background-color: #ffc107; /* Цвет фона */
+            border-color: #ffc107; /* Цвет рамки */
+        }
+
+        .btn-edit:hover {
+            background-color: #e0a800; /* Цвет фона при наведении */
+            border-color: #d39e00; /* Цвет рамки при наведении */
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">My Fitness Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Головна</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/reservations">Мої резервації</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Особистий кабінет</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fitness_center">Фітнес-центри</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Програма лояльності</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Номер резервації</th>
+                        <th>Дата</th>
+                        <th>Час</th>
+                        <th>Користувач</th>
+                        <th>Послуга</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ reservation.reservation_id }}</td>
+                        <td>{{ reservation.date }}</td>
+                        <td>{{ reservation.time }}</td>
+                        <td>{{ reservation.user_name }}</td>
+                        <td>{{ reservation.service_name }}</td>
+                        <td>
+                            <a href="/user/reservations/{{ reservation.reservation_id }}/edit" class="btn btn-primary btn-edit">Редактировать</a>
+                            <a href="/user/reservations/{{ reservation.reservation_id }}/delete" class="btn btn-primary btn-delete">Удалить</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

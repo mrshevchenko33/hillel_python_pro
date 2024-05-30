@@ -40,18 +40,47 @@
         .table-striped tbody tr:nth-of-type(odd) {
             background-color: rgba(0, 123, 255, 0.1);
         }
+
+        /* Стили для кнопок "Резервація" */
+        .btn-reservation {
+            padding: 5px 10px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="/" class="btn btn-primary">Головна</a>
-        <a href="/login" class="btn btn-primary">Увійти</a>
-        <a href="/register" class="btn btn-primary">Реєстрація</a>
-        <a href="/fitness_center" class="btn btn-primary">Фітнес-центри</a>
-        <a href="/" class="btn btn-primary">Програма лояльносты</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">My Fitness Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Головна</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/reservations">Мої резервації</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Особистий кабінет</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fitness_center">Фітнес-центри</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Програма лояльності</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+
+<div class="container">
     <h2 class="text-center mb-4">Послуги фітнес-центра</h2>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -64,6 +93,7 @@
                 <th>Опис</th>
                 <th>Макс. учасники</th>
                 <th>Фітнес-центр</th>
+                <th>Дія</th>
             </tr>
             </thead>
             <tbody>
@@ -76,6 +106,7 @@
                 <td>{{ service.description }}</td>
                 <td>{{ service.max_attendees }}</td>
                 <td>{{ service.gym_name }}</td>
+                <td><a href="/user/reservations" class="btn btn-primary btn-reservation">Резервація</a></td>
             </tr>
             {% endfor %}
             </tbody>

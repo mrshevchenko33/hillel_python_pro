@@ -6,51 +6,96 @@
     <title>Інформація про користувача</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Общие стили */
         body {
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Цвет фона страницы */
+            font-family: Arial, sans-serif; /* Шрифт */
+            padding-top: 20px; /* Отступ сверху */
         }
 
         .container {
-            margin-top: 20px;
+            max-width: 960px; /* Максимальная ширина контейнера */
+            margin-top: 20px; /* Отступ сверху контейнера */
         }
 
+        /* Стили для кнопок */
         .btn-group {
-            margin-bottom: 20px;
+            margin-bottom: 20px; /* Отступ снизу группы кнопок */
         }
 
+        .btn-primary {
+            background-color: #007bff; /* Цвет фона кнопки */
+            border-color: #007bff; /* Цвет рамки кнопки */
+            border-radius: 5px; /* Закругляем углы кнопки */
+            padding: 8px 20px; /* Добавляем внутренний отступ кнопке */
+            font-size: 16px; /* Размер текста кнопки */
+            margin-right: 10px; /* Отступ справа */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Цвет фона кнопки при наведении */
+            border-color: #0056b3; /* Цвет рамки кнопки при наведении */
+        }
+
+        /* Стили для таблицы */
         .table {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            background-color: #fff; /* Цвет фона таблицы */
+            border-radius: 10px; /* Закругляем углы таблицы */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Добавляем тень */
         }
 
         .table th,
         .table td {
-            vertical-align: middle;
-            text-align: center;
-            padding: 10px;
+            vertical-align: middle; /* Выравниваем содержимое по центру по вертикали */
+            text-align: center; /* Выравниваем содержимое по центру по горизонтали */
+            padding: 8px; /* Добавляем внутренний отступ */
+            font-size: 14px; /* Размер текста */
         }
 
         .table th {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #007bff; /* Цвет фона заголовка таблицы */
+            color: #fff; /* Цвет текста заголовка таблицы */
         }
 
         .table-striped tbody tr:nth-of-type(odd) {
-            background-color: rgba(0, 123, 255, 0.1);
+            background-color: rgba(0, 123, 255, 0.1); /* Цвет фона нечетных строк */
         }
     </style>
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">My Fitness Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Головна</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/reservations">Мої резервації</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Особистий кабінет</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fitness_center">Фітнес-центри</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Програма лояльності</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="container">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="/" class="btn btn-primary">Головна</a>
-        <a href="/login" class="btn btn-primary">Увійти</a>
-        <a href="/register" class="btn btn-primary">Реєстрація</a>
-        <a href="/fitness_center" class="btn btn-primary">Фітнес-центри</a>
-        <a href="/" class="btn btn-primary">Програма лояльносты</a>
     </div>
     <h2 class="text-center mb-4">Інформація про користувача</h2>
     <div class="table-responsive">

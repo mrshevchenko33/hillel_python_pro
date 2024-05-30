@@ -6,9 +6,82 @@
     <title>Деталі фітнес-центру</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Общие стили */
+        body {
+            background-color: #f8f9fa; /* Цвет фона страницы */
+            font-family: Arial, sans-serif; /* Шрифт */
+            padding-top: 20px; /* Отступ сверху */
+        }
+
+        .container {
+            max-width: 960px; /* Максимальная ширина контейнера */
+        }
+
+        /* Стили для шапки */
+        .navbar {
+            margin-bottom: 20px; /* Отступ снизу шапки */
+        }
+
+        /* Стили для карточки */
+        .card {
+            border: none; /* Удаляем рамку у карточки */
+            border-radius: 10px; /* Закругляем углы */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Добавляем тень */
+            background-color: #f8f9fa; /* Цвет фона карточки */
+            margin-top: 20px; /* Отступ сверху карточки */
+        }
+
+        .card-header {
+            background-color: #007bff; /* Цвет фона заголовка */
+            color: #fff; /* Цвет текста заголовка */
+            text-align: center;
+            border-radius: 10px 10px 0 0; /* Закругляем верхние углы заголовка */
+            padding: 20px 0; /* Добавляем внутренний отступ заголовку */
+            font-size: 24px; /* Размер шрифта заголовка */
+        }
+
+        .card-body {
+            padding: 20px; /* Добавляем внутренний отступ содержимому карточки */
+        }
+
+        .card-text {
+            padding: 10px 0; /* Добавляем внутренний отступ между элементами */
+            font-size: 18px; /* Размер шрифта текста */
+        }
     </style>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">My Fitness Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Головна</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/reservations">Мої резервації</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Особистий кабінет</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fitness_center">Фітнес-центри</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Програма лояльності</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container">
     <h2 class="text-center mb-4">Деталі фітнес-центру</h2>
