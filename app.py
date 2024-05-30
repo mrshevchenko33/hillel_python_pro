@@ -201,7 +201,7 @@ def get_trainer(gym_id):
         res = db.select_method("trainer", {'gym_id': gym_id}, join={'gym': 'trainer.gym_id = gym.id'},
                                columns=['trainer.id AS trainer_id', 'trainer.name AS trainer_name',
                                         'gym.name AS gym_name'])
-        return render_template('trainers_info.html', trainers=res)
+        return render_template('trainers_info.html', trainers=res, gym_id=gym_id)
 
 
 @app.route('/fitness_center/<gym_id>/trainer/<trainer_id>', methods=['GET'])
@@ -213,7 +213,7 @@ def trainer_info(gym_id, trainer_id):
                                         'gym.name AS gym_name'],
                                fetch_all=False)
         if res is not None:
-            return render_template('trainer_info.html', trainer=res)
+            return render_template('trainers_info.html', trainer=res)
         else:
             return "Trainer not found"
 
