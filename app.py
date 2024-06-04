@@ -1,12 +1,15 @@
 from flask import Flask, request, render_template, session, redirect
 from functools import wraps
+import os
 import sqlite3
+from utils import clac_slots
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-if __name__ == '__main__':
-    app.run(debug=True)
-app.secret_key = 'my_secret_key'
+app.secret_key = os.getenv('FLASK_SECRET_KEY')
 
 
 def dict_factory(cursor, row):
@@ -271,6 +274,8 @@ def user_reservations():
         return render_template('reservations.html', reservations=reservations, services=services)
 
     else:
+        form_dict = request.form
+        service_id = form_dict.get('service_id')
         with SQLiteDatabase('DB.db') as db:
             db.commit("reservation", {'user_id': user['id'], 'service_id': request.form.get('service_id'),
                                       'date': request.form.get('date'), 'time': request.form.get('time')})
@@ -326,7 +331,6 @@ def fitness_center(center_id):
 @app.route('/fitness_center/<center_id>/loyalty_programs', methods=['GET'])
 def loyalty_programs(center_id):
     return f'get loyalty programs for fitness center with id {center_id}'
-
 
 if __name__ == '__main__':
     app.run(debug=True)
