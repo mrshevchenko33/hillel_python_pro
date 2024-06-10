@@ -2,12 +2,12 @@ from flask import Flask, request, render_template, session, redirect
 from functools import wraps
 import os
 import sqlite3
-
+from utils import clac_slots
 from dotenv import load_dotenv
 
 from project_package.models import *
 from project_package.database import *
-from utils import clac_slots
+
 
 load_dotenv()
 
@@ -185,7 +185,7 @@ def user_reservations():
         trainer_id = form_dict.get('trainer_id')
         date = form_dict.get('date')
         time = form_dict.get('time')
-        new_reservation = Reservation(user_id=user['id'], service_id=int(service_id), trainer_id=int(trainer_id),
+        new_reservation = Reservation(user_id=session['user']['id'], service_id=int(service_id), trainer_id=int(trainer_id),
                                       date=date, time=time)
         db_session.add(new_reservation)
         db_session.commit()
