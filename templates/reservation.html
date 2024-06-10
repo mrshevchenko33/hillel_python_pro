@@ -126,11 +126,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ reservation.reservation_id }}</td>
+                        <td>{{ reservation.id }}</td>
                         <td>{{ reservation.date }}</td>
                         <td>{{ reservation.time }}</td>
-                        <td>{{ reservation.user_name }}</td>
-                        <td>{{ reservation.service_name }}</td>
+                        <td>{{ reservation.user.login }}</td>
+                        <td>{{ reservation.service.name }}</td>
                         <td>
                             <a href="/user/reservations/{{ reservation.reservation_id }}/edit" class="btn btn-primary btn-edit">Редактировать</a>
                             <a href="/user/reservations/{{ reservation.reservation_id }}/delete" class="btn btn-primary btn-delete">Удалить</a>

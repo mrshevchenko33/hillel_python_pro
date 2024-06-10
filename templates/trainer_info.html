@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Інформація про тренера</title>
+    <title>Інформація про тренера та послугу</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -15,28 +15,47 @@
             margin-top: 20px;
         }
 
-        .btn-group {
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            background-color: #fff;
+            padding: 20px;
             margin-bottom: 20px;
         }
 
-        .card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-            margin-top: 20px;
+        .form-check-column .form-check {
+            flex: 0 0 50%;
+            margin-bottom: 10px;
         }
 
-        .card-header {
+        .btn-primary {
             background-color: #007bff;
-            color: #fff;
+            border-color: #007bff;
         }
 
-        .card-body {
-            padding: 20px;
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
         }
 
-        .card-title {
-            margin-bottom: 0;
+        .navbar-brand, .nav-link {
+            font-size: 1.2em;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .info-section {
+            margin-bottom: 40px;
+        }
+
+        .form-check-column {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -74,21 +93,64 @@
 </nav>
 
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title mb-0">Інформація про тренера</h2>
+    <div class="form-container row">
+        <div class="left-column col-md-6 info-section">
+            <div class="card">
+                <h2 class="section-title">Інформація про тренера</h2>
+                <p><strong>Ім'я тренера:</strong> {{ trainer.name }}</p>
+                <p><strong>Опис тренера:</strong> {{ trainer.description }}</p>
+            </div>
+            <div class="card">
+                <h2 class="section-title">Інформація про послугу</h2>
+                <p><strong>Назва послуги:</strong> {{ service.name }}</p>
+                <p><strong>Опис послуги:</strong> {{ service.description }}</p>
+            </div>
         </div>
-        <div class="card-body">
-            <dl class="row">
-                <dt class="col-sm-4">ID тренера:</dt>
-                <dd class="col-sm-8">{{ trainer.trainer_id }}</dd>
 
-                <dt class="col-sm-4">Ім'я тренера:</dt>
-                <dd class="col-sm-8">{{ trainer.trainer_name }}</dd>
+        <div class="right-column col-md-6">
+            <div class="card">
+                <h2 class="section-title">Доступний час для бронювання</h2>
+                <form method="post" class="mb-4">
+                    <div class="form-group">
+                        <label for="date">Оберіть дату:</label>
+                        <input type="date" id="date" name="date" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Знайти доступний час</button>
+                </form>
 
-                <dt class="col-sm-4">Фітнес-центр:</dt>
-                <dd class="col-sm-8">{{ trainer.gym_name }}</dd>
-            </dl>
+                {% if available_slots %}
+                    <form method="post" action="/user/reservations" class="mb-4">
+                        <h3 class="section-title">Доступний час:</h3>
+                        <div class="form-check-column">
+                            {% for item in available_slots[:available_slots|length//2] %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="slot_{{ loop.index }}" name="time" value="{{ item.time().strftime('%H:%M') }}">
+                                    <label class="form-check-label" for="slot_{{ loop.index }}">
+                                        {{ item.time().strftime('%H:%M') }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-check-column">
+                            {% for item in available_slots[available_slots|length//2:] %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="slot_{{ loop.index }}" name="time" value="{{ item.time().strftime('%H:%M') }}">
+                                    <label class="form-check-label" for="slot_{{ loop.index }}">
+                                        {{ item.time().strftime('%H:%M') }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <input type="hidden" name="date" value="{{ date }}">
+                        <input type="hidden" name="trainer_id" value="{{ trainer.id }}">
+                        <input type="hidden" name="service_id" value="{{ service.id }}">
+                        <button type="submit" class="btn btn-primary btn-block">Забронювати</button>
+                    </form>
+                {% else %}
+                    <p>Немає доступного часу для обраної дати.</p>
+                {% endif %}
+
+            </div>
         </div>
     </div>
 </div>
@@ -96,4 +158,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+<html>
+
+

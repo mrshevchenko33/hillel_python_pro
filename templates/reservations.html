@@ -106,101 +106,66 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/">My Fitness Center</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Головна</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/reservations">Мої резервації</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user">Особистий кабінет</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/fitness_center">Фітнес-центри</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Програма лояльності</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Головна</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/user">Особистий кабінет</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/fitness_center">Фітнес-центри</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/">Програма лояльності</a>
+</li>
+<li class="nav-item">
+<a class="nav-link btn btn-primary btn-logout" href="/logout">Вийти</a>
+</li>
+</ul>
+</div>
+</div>
 
+</nav>
 <div class="container">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <!-- Посилання на інші сторінки -->
-    </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title mb-0">Мої резервації</h2>
                 </div>
                 <div class="card-body">
                     {% if reservations %}
-                        <ul class="list-group">
+                        <div class="row">
                             {% for reservation in reservations %}
-                                <li class="list-group-item">
-                                    <h5 class="card-title highlight">Резервація №{{ reservation.reservation_id }}</h5>
-                                    <p class="card-text">Дата: {{ reservation.date }}</p>
-                                    <p class="card-text">Час: {{ reservation.time }}</p>
-                                    <p class="card-text">Користувач: {{ reservation.user_name }}</p>
-                                    <p class="card-text">Послуга: {{ reservation.service_name }}</p>
-                                    <p class="card-text">Фітнес-центр: {{ reservation.gym_name }}</p>
-                                    <!-- Посилання на резервацію з використанням її ідентифікатора -->
-                                    <a href="/user/reservations/{{ reservation.reservation_id }}" class="btn btn-primary btn-sm">Перейти</a>
-                                    <a href="#" class="btn btn-delete btn-sm">Видалити</a>
-                                    <a href="#" class="btn btn-edit btn-sm">Редагувати</a>
-                                </li>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title highlight">Резервація №{{ reservation.id }}</h5>
+                                            <p class="card-text">Дата: {{ reservation.date }}</p>
+                                            <p class="card-text">Час: {{ reservation.time }}</p>
+                                            <p class="card-text">Користувач: {{ reservation.user.login }}</p>
+                                            <p class="card-text">Послуга: {{ reservation.service.name }}</p>
+                                            <!-- Посилання на резервацію з використанням її ідентифікатора -->
+                                            <a href="/user/reservations/{{ reservation.id }}" class="btn btn-primary btn-sm">Редагувати</a>
+                                        </div>
+                                    </div>
+                                </div>
                             {% endfor %}
-                        </ul>
+                        </div>
                     {% else %}
                         <p class="card-text">Ви ще не здійснили жодної резервації</p>
                     {% endif %}
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title mb-0 review-title">Забронювати послугу</h2>
-                </div>
-                <div class="card-body review-form">
-                    <form method="post" action="/user/reservations">
-                        <div class="form-group">
-                            <label for="service_id">Послуга:</label>
-                            <select class="form-control" id="service_id" name="service_id" required>
-                                {% for service in services %}
-                                    <option value="{{ service.id }}">{{ service.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Дата:</label>
-                            <input type="date" class="form-control" id="date" name="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="time">Час:</label>
-                            <input type="time" class="form-control" id="time" name="time" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Забронювати</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

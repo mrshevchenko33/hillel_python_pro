@@ -93,20 +93,30 @@
                 <th>Опис</th>
                 <th>Макс. учасники</th>
                 <th>Фітнес-центр</th>
+                <th>Доступні сервіси</th>
                 <th>Дія</th>
             </tr>
             </thead>
             <tbody>
             {% for service in services %}
             <tr>
-                <td>{{ service.service_id }}</td>
+                <td>{{ service.id }}</td>
                 <td>{{ service.name }}</td>
                 <td>{{ service.duration }}</td>
                 <td>{{ service.price }}</td>
                 <td>{{ service.description }}</td>
                 <td>{{ service.max_attendees }}</td>
-                <td>{{ service.gym_name }}</td>
-                <td><a href="/user/reservations" class="btn btn-primary btn-reservation">Резервація</a></td>
+                <td>{{ service.gym.name }}</td>
+                <td>
+                    <select name="trainer" class="custom-select" id="trainer-select-{{ service.id }}">
+                        {% for trainer in service.trainers %}
+                        <option value="{{ trainer.id }}">{{ trainer.name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-reservation" onclick="reserveService({{ gym_id }}, {{ service.id }})">Резервація</button>
+                </td>
             </tr>
             {% endfor %}
             </tbody>
@@ -116,5 +126,12 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    function reserveService(gymId, serviceId) {
+        var trainerSelect = document.getElementById('trainer-select-' + serviceId);
+        var trainerId = trainerSelect.value;
+        window.location.href = '/fitness_center/' + gymId + '/trainer/' + trainerId + '/service/' + serviceId;
+    }
+</script>
 </body>
 </html>

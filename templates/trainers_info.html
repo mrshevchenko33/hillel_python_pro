@@ -36,6 +36,11 @@
             background-color: #f2f2f2;
         }
 
+        /* Стили для кнопки "Зарезервувати" */
+        .btn-reserve {
+            margin-right: 5px;
+        }
+
         /* Стили для кнопки "Залишити відгук" */
         .btn-review {
             margin-right: 5px;
@@ -89,12 +94,11 @@
         <tbody>
         {% for trainer in trainers %}
         <tr>
-            <td>{{ trainer.trainer_id }}</td>
-            <td>{{ trainer.trainer_name }}</td>
-            <td>{{ trainer.gym_name }}</td>
-            <td> <!-- Добавляем кнопку "Залишити відгук" для каждого тренера -->
-                <a href="/fitness_center/{{ gym_id }}/trainer/{{ trainer.trainer_id }}/rating" class="btn btn-primary">Залишити відгук</a>
-
+            <td>{{ trainer.id }}</td>
+            <td>{{ trainer.name }}</td>
+            <td>{{ trainer.gym.name }}</td>
+            <td>
+                <a href="/fitness_center/{{ trainer.gym.id }}/trainer/{{ trainer.id }}/rating" class="btn btn-primary btn-review">Залишити відгук</a>
             </td>
         </tr>
         {% endfor %}

@@ -108,12 +108,11 @@
                     {% if reviews %}
                         <ul class="list-group">
                             {% for review in reviews %}
-                                <li class="list-group-item">
-                                    <h5 class="card-title highlight">Рейтинг: {{ review.points }}</h5>
-                                    <p class="card-text">Відгук: {{ review.text }}</p>
-                                    <p class="card-text">Користувач: {{ review.login }}</p>
-                                    <p class="card-text">Фітнес-центр: {{ review.gym_name }}</p>
-                                    <a href="/edit_review/{{ review.id }}" class="btn btn-primary">Редагувати</a>
+                                <h5 class="card-title highlight">Рейтинг: {{ trainer.rating }}</h5>
+                                <p class="card-text">Відгук: {{ review.text }}</p>
+                                <p class="card-text">Оцінка: {{ review.points }}</p>
+                                <p class="card-text">Користувач: {{ review.user.login }}</p>
+                                <p class="card-text">Фітнес-центр: {{ trainer.gym.name }}</p>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -132,7 +131,7 @@
                     <form method="post">
                         <div class="form-group">
                             <label for="rating">Оцінка:</label>
-                            <select class="form-control" id="rating" name="rating" required>
+                            <select class="form-control" id="rating" name="rating" required>{{ user_reviw.points }}
                                 {% for i in range(1, 11) %}
                                     <option value="{{ i }}">{{ i }}</option>
                                 {% endfor %}
