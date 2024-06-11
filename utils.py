@@ -20,9 +20,16 @@ def dict_factory(cursor, row):
 
 def clac_slots(trainer_id, service_id, date):
 
-    booked_time = db_session.query(Reservation).join(Service, Service.id == Reservation.service_id).filter(Reservation.trainer_id == trainer_id, Reservation.date == date).all()
-    trainer_schedule = db_session.query(TrainerSchedule).filter(TrainerSchedule.trainer_id == trainer_id, TrainerSchedule.date == date).first()
-    trainer_capacity = db_session.query(TrainerServices).filter(TrainerServices.trainer_id == trainer_id, TrainerServices.service_id == service_id).first()
+    booked_time = db_session.query(Reservation) \
+        .join(Service, Service.id == Reservation.service_id) \
+        .filter(Reservation.trainer_id == trainer_id, Reservation.date == date) \
+        .all()
+    trainer_schedule = db_session.query(TrainerSchedule) \
+        .filter(TrainerSchedule.trainer_id == trainer_id, TrainerSchedule.date == date) \
+        .first()
+    trainer_capacity = db_session.query(TrainerServices) \
+        .filter(TrainerServices.trainer_id == trainer_id, TrainerServices.service_id == service_id) \
+        .first()
     service_info = db_session.query(Service).get(service_id)
 
     if not trainer_schedule or not trainer_capacity or not service_info:
