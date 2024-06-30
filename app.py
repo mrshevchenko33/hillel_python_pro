@@ -4,6 +4,7 @@ import os
 import sqlite3
 from utils import clac_slots
 from dotenv import load_dotenv
+from send_mail import send_mail
 
 from project_package.models import *
 from project_package.database import *
@@ -101,8 +102,9 @@ def get_funds(user_id):
         return user
 
 
-@login_required
+
 @app.route('/fitness_center/<int:gym_id>/services', methods=['GET'])
+@login_required
 def get_services(gym_id):
     services = db_session.query(Service).join(Gym, Service.gym_id == Gym.id).filter(Service.gym_id == gym_id).all()
     for service in services:
@@ -189,6 +191,19 @@ def user_reservations():
                                       date=date, time=time)
         db_session.add(new_reservation)
         db_session.commit()
+        subject = 'Ваша резервація створена!'
+        text = f"""
+                Деталі резервації:
+                Послуга: {new_reservation.service.name}
+                Тренер: {new_reservation.trainer.name}
+                Дата: {new_reservation.date}
+                Час: {new_reservation.time}
+
+                З повагою,
+                Ваша команда
+                """
+        send_mail.delay(new_reservation.user.email, subject, text)
+
         return redirect('/user/reservations')
 
 
@@ -234,4 +249,4 @@ def loyalty_programs(center_id):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5001)

@@ -11,6 +11,7 @@ class User(Base):
     birth_date = Column(String(50), default='1940-01-01', nullable=False)
     phone = Column(String(50))
     funds = Column(Integer, nullable=False, default=0)
+    email = Column(String(50))
 
     # relationships
     review = relationship('Review', back_populates='user')
